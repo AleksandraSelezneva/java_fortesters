@@ -14,12 +14,10 @@ public class MyFirstProgram {
         System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
         Point p = new Point(1,2,3,4);
-        System.out.println("Расстояние между точками = " + distance(p));
+        System.out.println("Расстояние между точками = " + p.distance());
     }
     public static void hello(String somebody) {
         System.out.println("Hello," + somebody + "!");
     }
-    public static double distance (Point p) {
-        return Math.sqrt((p.x2 - p.x1) * (p.x2 - p.x1) + (p.y2 - p.y1) * (p.y2 - p.y1));
-    }
+
 }
