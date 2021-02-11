@@ -1,4 +1,4 @@
-package ru.stqa.fortesters.addressbook;
+package ru.stqa.fortesters.addressbook.model;
 
 public class GroupData {
     private final String name;

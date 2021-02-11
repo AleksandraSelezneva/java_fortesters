@@ -1,4 +1,4 @@
-package ru.stqa.fortesters.addressbook;
+package ru.stqa.fortesters.addressbook.model;
 
 public class ContactData {
     private final String firstname;

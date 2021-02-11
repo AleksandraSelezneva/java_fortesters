@@ -1,0 +1,16 @@
+package ru.stqa.fortesters.addressbook.tests;
+
+import org.testng.annotations.Test;
+import ru.stqa.fortesters.addressbook.model.ContactData;
+
+public class ContactCreationTest extends TestBase {
+
+  @Test
+  public void testContactCreation() throws Exception {
+    app.initContactCreation();
+    app.fillContactForm(new ContactData("Aleksandra", "Selezneva", "89217775533", "didaf@icloud.com"));
+    app.submitContactCreation();
+    app.gotoHomePage();
+    app.logout();
+  }
+}
