@@ -6,7 +6,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class ContactDeletionTests {
+public class ContactDeletionTests extends TestBase {
   private WebDriver wd;
   private boolean acceptNextAlert = true;
 
@@ -14,21 +14,43 @@ public class ContactDeletionTests {
   public void setUp() throws Exception {
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost:8080/addressbook/");
+    login("admin", "secret");
+  }
+
+  private void login(String username, String password) {
+    wd.findElement(By.name("user")).click();
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testContactDeletion() throws Exception {
-    wd.get("http://localhost:8080/addressbook/");
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
+    selectedContact();
+    deleteSelectedContact();
+    gotoHomePage();
+    logout();
+  }
+
+  private void selectedContact() {
     wd.findElement(By.name("selected[]")).click();
+  }
+
+  private void deleteSelectedContact() {
     acceptNextAlert = true;
     wd.findElement(By.xpath("//input[@value='Delete']")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+  }
+
+  private void gotoHomePage() {
     wd.findElement(By.linkText("home")).click();
+  }
+
+  private void logout() {
     wd.findElement(By.linkText("Logout")).click();
   }
 
