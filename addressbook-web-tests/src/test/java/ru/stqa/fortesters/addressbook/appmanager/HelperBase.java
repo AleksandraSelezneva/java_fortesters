@@ -40,4 +40,13 @@ public class HelperBase {
             acceptNextAlert = true;
         }
     }
+//проверка наличия диалогового окна
+    public boolean isAlertPresent() {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
+}
