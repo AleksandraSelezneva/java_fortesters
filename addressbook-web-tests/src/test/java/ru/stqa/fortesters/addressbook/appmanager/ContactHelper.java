@@ -3,9 +3,14 @@ package ru.stqa.fortesters.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
+import ru.stqa.fortesters.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -65,5 +70,17 @@ public class ContactHelper extends HelperBase {
 
     public int getContactCount() {
         return wd.findElements(By.xpath("//img[@alt='vCard']")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement element : elements) {
+            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            ContactData contact = new ContactData(firstname,lastname, null,null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
