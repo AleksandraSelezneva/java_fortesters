@@ -1,5 +1,7 @@
 package ru.stqa.fortesters.addressbook.model;
 
+import java.util.Objects;
+
 public class GroupData {
     private int id;
     private final String name;
@@ -57,7 +59,7 @@ public class GroupData {
         GroupData groupData = (GroupData) o;
 
         if (id != groupData.id) return false;
-        return name != null ? name.equals(groupData.name) : groupData.name == null;
+        return Objects.equals(name, groupData.name);
     }
 
     @Override

@@ -26,16 +26,9 @@ public class ContactCreationTest extends TestBase {
 
     //добавляем в список before группу, которую только что создали
     before.add(contact);
-    //
-    int max = 0;
-    for (ContactData c : after) {
-      if (c.getId() > max) {
-        max = c.getId();
-      }
-    }
-    contact.setId(max);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
+    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
     app.getSessionHelper().logout();
   }
