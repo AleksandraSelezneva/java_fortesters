@@ -72,8 +72,11 @@ public class GroupHelper extends HelperBase {
 //проходим по этим элементам в цикле и из каждого из них получаем text (имя группы)
         for (WebElement element : elements) {
             String name = element.getText();
+            //ищем внутри одного эдемента другой (в element, который получили выше, ищем чекбокс input )
+            //в нем берем аттрибут value
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             //создаем объект типа GroupData
-            GroupData group = new GroupData(name, null, null);
+            GroupData group = new GroupData(id, name, null, null);
             //добавляем созданный объект в список
             groups.add(group);
         }
