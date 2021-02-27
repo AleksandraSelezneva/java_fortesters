@@ -3,7 +3,6 @@ package ru.stqa.fortesters.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.GroupData;
-
 import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
@@ -24,7 +23,7 @@ public class GroupDeletionTests extends TestBase {
         before.remove(0);
         Assert.assertEquals(before, after);
 
-        app.getSessionHelper().logout();
+        //app.getSessionHelper().logout();
 
     }
 }
