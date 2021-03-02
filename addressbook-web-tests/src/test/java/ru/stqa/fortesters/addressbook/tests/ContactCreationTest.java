@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
-  @Test (enabled = false)
+  @Test (enabled = true)
   public void testContactCreation() throws Exception {
     app.getNavigationHelper().gotoHomePage();
     List<ContactData> before = app.getContactHelper().getContactList();
@@ -33,6 +33,6 @@ public class ContactCreationTest extends TestBase {
     after.sort(byId);
     Assert.assertEquals(before, after);
 
-    app.getSessionHelper().logout();
+    //app.getSessionHelper().logout();
   }
 }

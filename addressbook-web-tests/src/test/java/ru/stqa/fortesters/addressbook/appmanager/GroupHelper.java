@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.fortesters.addressbook.model.GroupData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +52,20 @@ public class GroupHelper extends HelperBase {
         fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
+    }
+
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
+
+    public void deleteGroup(int index) {
+selectGroup(index);
+deleteSelectedGroups();
+returnToGroupPage();
     }
 
     public boolean isThereAGroup() {

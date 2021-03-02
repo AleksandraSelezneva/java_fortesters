@@ -7,11 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
-import ru.stqa.fortesters.addressbook.model.GroupData;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase {
@@ -62,6 +59,26 @@ public class ContactHelper extends HelperBase {
         initContactCreation();
         fillContactForm(new ContactData("Aleksandra", "Selezneva", "89217775533", "pochta", "test1"), true);
         submitContactCreation();
+    }
+
+    public void modifyContact(int index, ContactData contact) {
+        initContactModification(index);
+        fillContactForm(contact, false);
+        submitContactModification();
+        gotoHomePage();
+    }
+
+    public void deleteContact(int index) {
+        selectedContact(index);
+        deleteSelectedContact();
+        gotoHomePage();
+    }
+
+    public void gotoHomePage() {
+        if (isElementPresent(By.id("maintable"))){
+            return;
+        }
+        click(By.linkText("home"));
     }
 
     public boolean isThereAContact() {
