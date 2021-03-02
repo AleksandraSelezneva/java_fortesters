@@ -5,28 +5,27 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
-        app.getNavigationHelper().gotoHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("Aleksandra", "Selezneva",
+        app.goTo().homePage();
+        if (app.contact().list().size() == 1) {
+            app.contact().create(new ContactData("Aleksandra", "Selezneva",
                     "89217775533", "pochta", "test1"), true);
         }
     }
 
     @Test (enabled = true)
     public void testContactModification() throws Exception {
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         ContactData contact = new ContactData(before.get(index).getId(), "Alex", "Selezneva",
                 "89217775533", "didaf@icloud.com", null);
-        app.getContactHelper().modifyContact(index, contact);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
         before.remove(before.size() - 1);
         before.add(contact);

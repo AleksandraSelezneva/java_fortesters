@@ -6,23 +6,22 @@ import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
   @Test (enabled = true)
   public void testContactCreation() throws Exception {
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().gotoGroupPage();
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
+    app.goTo().groupPage();
+    if (!app.group().isThereAGroup()) {
+      app.group().create(new GroupData("test1", null, "test3"));
     }
     ContactData contact = new ContactData("Aleksandra", "Selezneva", "89217775533", "pochta", "test1");
-    app.getContactHelper().createContact(contact,true);
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact,true);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     //добавляем в список before группу, которую только что создали
