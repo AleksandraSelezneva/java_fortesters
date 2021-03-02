@@ -88,10 +88,8 @@ returnToGroupPage();
             //ищем внутри одного эдемента другой (в element, который получили выше, ищем чекбокс input )
             //в нем берем аттрибут value
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            //создаем объект типа GroupData
-            GroupData group = new GroupData(id, name, null, null);
-            //добавляем созданный объект в список
-            groups.add(group);
+            //создаем объект типа GroupData и добавляем созданный объект в список
+            groups.add(new GroupData().withId(id).withName(name));
         }
         //возвращаем заполненный список
         return groups;
