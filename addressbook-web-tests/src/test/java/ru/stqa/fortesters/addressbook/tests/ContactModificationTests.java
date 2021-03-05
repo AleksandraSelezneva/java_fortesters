@@ -4,32 +4,34 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
-import java.util.Set;
+import ru.stqa.fortesters.addressbook.model.Contacts;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
     @BeforeMethod
-    public void ensurePreconditions(){
+    public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().all().size() == 1) {
             app.contact().create(new ContactData()
-                    .withFirstname("Aleksandra").withLastname("Selezneva").withMobile("89217775533").withEmail("pochta").withGroup("test1"), true);
+                    .withFirstname("Aleksandra").withLastname("Selezneva").withMobile("89217775533").withEmail(
+                            "pochta").withGroup("test1"), true);
         }
     }
 
-    @Test (enabled = true)
+    @Test(enabled = true)
     public void testContactModification() throws Exception {
         app.goTo().homePage();
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData()
-                .withId(modifiedContact.getId()).withFirstname("Alex").withLastname("Selezneva").withMobile("89217775533").withEmail("didaf@icloud.com");
+                .withId(modifiedContact.getId()).withFirstname("Alex").withLastname("Selezneva").withMobile(
+                        "89217775533").withEmail("didaf@icloud.com");
         app.contact().modify(contact);
-        Set<ContactData> after = app.contact().all();
+        Contacts after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
-        before.remove(modifiedContact);
-        before.add(contact);
-
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
         //app.getSessionHelper().logout();
     }
 }
