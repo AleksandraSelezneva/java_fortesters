@@ -100,10 +100,13 @@ public class ContactHelper extends HelperBase {
         contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement element : elements) {
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+//получили все телефоны и порезали на строки
+            String[] phones = element.findElement(By.cssSelector("td:nth-child(6)")).getText().split("\n");
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
         }
         return new Contacts(contactCache);
     }
