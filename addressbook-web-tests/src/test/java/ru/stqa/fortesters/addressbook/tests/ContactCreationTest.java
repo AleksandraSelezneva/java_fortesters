@@ -20,7 +20,9 @@ public class ContactCreationTest extends TestBase {
             app.group().create(new GroupData().withName("test1").withFooter("test3"));
         }
         ContactData contact = new ContactData()
-                .withFirstname("Aleksandra").withLastname("Selezneva").withMobile("89217775533").withEmail("pochta").withGroup("test1");
+                .withFirstname("Aleksandra").withLastname("Selezneva")
+                .withHome("123").withMobile("89217775533").withWork("12345")
+                .withEmail("pochta").withGroup("test1");
         app.contact().create(contact, true);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));

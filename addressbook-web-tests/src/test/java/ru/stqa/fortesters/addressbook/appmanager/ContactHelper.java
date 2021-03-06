@@ -24,7 +24,9 @@ public class ContactHelper extends HelperBase {
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
+        type(By.name("home"), contactData.getHome());
         type(By.name("mobile"), contactData.getMobile());
+        type(By.name("work"), contactData.getWork());
         type(By.name("email"), contactData.getEmail());
 
         if (creation) {
@@ -53,7 +55,9 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact, boolean creation) {
         initContactCreation();
         fillContactForm(new ContactData()
-                .withFirstname("Aleksandra").withLastname("Selezneva").withMobile("89217775533").withEmail("pochta").withGroup("test1"), true);
+                .withFirstname("Aleksandra").withLastname("Selezneva")
+                .withHome("123").withMobile("89217775533").withWork("12345")
+                .withEmail("pochta").withGroup("test1"), true);
         submitContactCreation();
         contactCache = null;
     }
