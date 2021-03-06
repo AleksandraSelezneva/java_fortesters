@@ -3,7 +3,6 @@ package ru.stqa.fortesters.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,8 @@ public class ContactPhoneTests extends TestBase {
             app.contact().create(new ContactData()
                     .withFirstname("Aleksandra").withLastname("Selezneva")
                     .withHome("123").withMobile("89217775533").withWork("12345")
-                    .withEmail("pochta").withGroup("test1"), true);
+                    .withEmail("pochta").withEmail2("pochta2")
+                    .withGroup("test1"), true);
         }
     }
 
@@ -32,6 +32,7 @@ public class ContactPhoneTests extends TestBase {
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+        assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
     }
 
     private String mergePhones(ContactData contact) {
@@ -39,6 +40,12 @@ public class ContactPhoneTests extends TestBase {
                 .stream().filter((s) -> ! s.equals(""))
                 .map(ContactPhoneTests::cleaned)
         .collect(Collectors.joining("\n"));
+    }
+
+    private String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmail(),contact.getEmail2())
+                .stream().filter((s) -> ! s.equals(""))
+                .collect(Collectors.joining("\n"));
     }
 
     public static String cleaned (String phone) {
