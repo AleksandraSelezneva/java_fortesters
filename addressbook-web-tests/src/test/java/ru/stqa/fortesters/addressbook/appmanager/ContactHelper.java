@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
-
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -28,6 +27,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("work"), contactData.getWork());
         type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -57,7 +57,8 @@ public class ContactHelper extends HelperBase {
         fillContactForm(new ContactData()
                 .withFirstname("Aleksandra").withLastname("Selezneva")
                 .withHome("123").withMobile("89217775533").withWork("12345")
-                .withEmail("pochta").withGroup("test1"), true);
+                .withEmail("pochta").withEmail2("pochta2")
+                .withGroup("test1"), true);
         submitContactCreation();
         contactCache = null;
     }
