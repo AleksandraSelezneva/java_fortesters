@@ -22,7 +22,7 @@ public class ContactCreationTest extends TestBase {
                 .withFirstname("Aleksandra").withLastname("Selezneva")
                 .withHome("123").withMobile("89217775533").withWork("12345")
                 .withEmail("pochta").withEmail2("pochta2")
-                .withGroup("test1");
+                .withGroup("test1").withAddress("St.Petersburg, Popova st., 5");
         app.contact().create(contact, true);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));

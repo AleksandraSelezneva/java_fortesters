@@ -19,7 +19,7 @@ public class ContactPhoneTests extends TestBase {
                     .withFirstname("Aleksandra").withLastname("Selezneva")
                     .withHome("123").withMobile("89217775533").withWork("12345")
                     .withEmail("pochta").withEmail2("pochta2")
-                    .withGroup("test1"), true);
+                    .withGroup("test1").withAddress("г.Санкт-Петербург,ул.Некрасова,д.21"), true);
         }
     }
 
@@ -33,6 +33,7 @@ public class ContactPhoneTests extends TestBase {
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     }
 
     private String mergePhones(ContactData contact) {

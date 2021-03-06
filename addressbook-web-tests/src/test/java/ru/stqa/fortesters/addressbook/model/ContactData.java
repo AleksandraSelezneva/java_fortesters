@@ -71,8 +71,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAllEmails(String allEmails) {
-        this.allEmails = allEmails;
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -114,6 +114,10 @@ public class ContactData {
 
     public String getAllEmails() {
         return allEmails;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public int getId() {

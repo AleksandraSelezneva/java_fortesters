@@ -28,6 +28,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), contactData.getWork());
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
+        type(By.name("address"), contactData.getAddress());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -58,7 +59,7 @@ public class ContactHelper extends HelperBase {
                 .withFirstname("Aleksandra").withLastname("Selezneva")
                 .withHome("123").withMobile("89217775533").withWork("12345")
                 .withEmail("pochta").withEmail2("pochta2")
-                .withGroup("test1"), true);
+                .withGroup("test1").withAddress("г.Cанкт-Петербург, ул.Попова, д.4"), true);
         submitContactCreation();
         contactCache = null;
     }
@@ -111,8 +112,9 @@ public class ContactHelper extends HelperBase {
 //получили все телефоны и порезали на строки
             String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
             String allEmails = element.findElement(By.cssSelector("td:nth-child(5)")).getText();
+            String address = element.findElement(By.cssSelector("td:nth-child(4)")).getText();
             contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withAllPhones(allPhones).withAllEmails(allEmails));
+                    .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
         }
         return new Contacts(contactCache);
     }
@@ -126,8 +128,10 @@ public class ContactHelper extends HelperBase {
         String work = wd.findElement(By.name("work")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).
-                withHome(home).withMobile(mobile).withWork(work).withEmail(email).withEmail2(email2);
+                withHome(home).withMobile(mobile).withWork(work)
+                .withEmail(email).withEmail2(email2).withAddress(address);
     }
 }
