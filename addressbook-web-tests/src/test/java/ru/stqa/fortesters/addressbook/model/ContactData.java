@@ -1,5 +1,6 @@
 package ru.stqa.fortesters.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -15,6 +16,7 @@ public class ContactData {
     private String group;
     private String allPhones;
     private String address;
+    private File photo;
 
     public ContactData withId(int id) {
         this.id = id;
@@ -76,6 +78,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -118,6 +125,10 @@ public class ContactData {
 
     public String getAddress() {
         return address;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     public int getId() {

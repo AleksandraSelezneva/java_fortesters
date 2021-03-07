@@ -3,6 +3,8 @@ package ru.stqa.fortesters.addressbook.appmanager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Alert;
 
+import java.io.File;
+
 public class HelperBase {
     protected WebDriver wd;
     public boolean acceptNextAlert = true;
@@ -24,6 +26,12 @@ public class HelperBase {
                 wd.findElement(locator).sendKeys(text);
             }
         }
+    }
+
+    protected void attach(By locator, File file) {
+        if (file != null) {
+                wd.findElement(locator).sendKeys(file.getAbsolutePath());
+            }
     }
 
     public String closeAlertAndGetItsText() {

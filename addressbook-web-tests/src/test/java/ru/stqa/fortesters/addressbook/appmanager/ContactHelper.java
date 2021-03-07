@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
+
+import java.io.File;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -29,6 +31,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("address"), contactData.getAddress());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -55,11 +58,12 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact, boolean creation) {
         initContactCreation();
+        File photo = new File("src/test/resources/ava.png");
         fillContactForm(new ContactData()
                 .withFirstname("Aleksandra").withLastname("Selezneva")
                 .withHome("123").withMobile("89217775533").withWork("12345")
                 .withEmail("pochta").withEmail2("pochta2")
-                .withGroup("test1").withAddress("г.Cанкт-Петербург, ул.Попова, д.4"), true);
+                .withGroup("test1").withAddress("г.Cанкт-Петербург, ул.Попова, д.4").withPhoto(photo), true);
         submitContactCreation();
         contactCache = null;
     }
