@@ -18,7 +18,7 @@ public class ContactPhoneTests extends TestBase {
             app.contact().create(new ContactData()
                     .withFirstname("Aleksandra").withLastname("Selezneva")
                     .withHome("123").withMobile("89217775533").withWork("12345")
-                    .withEmail("pochta").withEmail2("pochta2")
+                    .withEmail("pochta").withEmail2("pochta2").withEmail3("pochta3")
                     .withGroup("test1").withAddress("г.Санкт-Петербург,ул.Некрасова,д.21"), true);
         }
     }
@@ -44,7 +44,7 @@ public class ContactPhoneTests extends TestBase {
     }
 
     private String mergeEmails(ContactData contact) {
-        return Arrays.asList(contact.getEmail(),contact.getEmail2())
+        return Arrays.asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3())
                 .stream().filter((s) -> ! s.equals(""))
                 .collect(Collectors.joining("\n"));
     }

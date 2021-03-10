@@ -30,6 +30,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), contactData.getWork());
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
         type(By.name("address"), contactData.getAddress());
         attach(By.name("photo"), contactData.getPhoto());
 
@@ -62,7 +63,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(new ContactData()
                 .withFirstname("Aleksandra").withLastname("Selezneva")
                 .withHome("123").withMobile("89217775533").withWork("12345")
-                .withEmail("pochta").withEmail2("pochta2")
+                .withEmail("pochta").withEmail2("pochta2").withEmail3("pochta3")
                 .withGroup("test1").withAddress("г.Cанкт-Петербург, ул.Попова, д.4").withPhoto(photo), true);
         submitContactCreation();
         contactCache = null;
@@ -132,10 +133,12 @@ public class ContactHelper extends HelperBase {
         String work = wd.findElement(By.name("work")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).
                 withHome(home).withMobile(mobile).withWork(work)
-                .withEmail(email).withEmail2(email2).withAddress(address);
+                .withEmail(email).withEmail2(email2).withEmail3(email3)
+                .withAddress(address);
     }
 }
