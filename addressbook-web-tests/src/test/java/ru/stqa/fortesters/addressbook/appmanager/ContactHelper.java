@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
-
 import java.io.File;
 import java.util.List;
 
@@ -59,12 +58,7 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact, boolean creation) {
         initContactCreation();
-        File photo = new File("src/test/resources/ava.png");
-        fillContactForm(new ContactData()
-                .withFirstname("Aleksandra").withLastname("Selezneva")
-                .withHome("123").withMobile("89217775533").withWork("12345")
-                .withEmail("pochta").withEmail2("pochta2").withEmail3("pochta3")
-                .withGroup("test1").withAddress("г.Cанкт-Петербург, ул.Попова, д.4").withPhoto(photo), true);
+        fillContactForm(contact, true);
         submitContactCreation();
         contactCache = null;
     }
