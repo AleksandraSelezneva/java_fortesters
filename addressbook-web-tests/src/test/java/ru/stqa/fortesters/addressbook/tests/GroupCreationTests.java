@@ -4,14 +4,10 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
 import ru.stqa.fortesters.addressbook.model.GroupData;
 import ru.stqa.fortesters.addressbook.model.Groups;
-
-import javax.xml.crypto.dsig.XMLSignature;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
