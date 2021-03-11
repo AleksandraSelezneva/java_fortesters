@@ -3,6 +3,8 @@ package ru.stqa.fortesters.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.GroupData;
@@ -43,6 +45,8 @@ public class ContactDataGenerator {
             saveAsCsv(contacts, new File(file));
         } else if (format.equals("xml")){
             saveAsXml(contacts, new File(file));
+        } else if (format.equals("json")){
+            saveAsJson(contacts, new File(file));
         } else {
             System.out.println("Unrecognized format");
         }
@@ -66,7 +70,16 @@ public class ContactDataGenerator {
         writer.close();
     }
 
-    private static List<ContactData> generateContacts(int count) {
+    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
+    }
+
+
+        private static List<ContactData> generateContacts (int count) {
         List<ContactData>contacts = new ArrayList<ContactData>();
         for (int i = 0; i <count; i++){
             contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
