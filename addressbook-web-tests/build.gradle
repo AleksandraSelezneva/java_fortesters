@@ -4,7 +4,7 @@ repositories {
     mavenCentral()
 }
 
-dependencies{
+dependencies {
     implementation 'org.testng:testng:7.0.0'
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
@@ -12,3 +12,16 @@ dependencies{
     implementation 'com.thoughtworks.xstream:xstream:1.4.15'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
+
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+}
+
