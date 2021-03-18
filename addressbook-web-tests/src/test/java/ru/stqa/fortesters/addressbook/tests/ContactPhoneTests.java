@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -13,8 +12,8 @@ public class ContactPhoneTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
+            app.goTo().homePage();
             app.contact().create(new ContactData()
                     .withFirstname("Aleksandra").withLastname("Selezneva")
                     .withHome("123").withMobile("89217775533").withWork("12345")
