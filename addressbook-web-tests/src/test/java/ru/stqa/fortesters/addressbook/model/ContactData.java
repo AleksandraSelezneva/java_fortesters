@@ -4,10 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table (name = "addressbook")
@@ -57,9 +58,6 @@ public class ContactData {
     private String allEmails;
 
     @Transient
-    private String group;
-
-    @Transient
     private String allPhones;
 
     @Expose
@@ -71,6 +69,11 @@ public class ContactData {
     @Column(name = "photo")
     @Type(type = "text")
     private File photo;
+
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name = "address_in_groups",
+            joinColumns = @JoinColumn (name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public ContactData withId(int id) {
         this.id = id;
@@ -114,11 +117,6 @@ public class ContactData {
 
     public ContactData withEmail3(String email3) {
         this.email3 = email3;
-        return this;
-    }
-
-    public ContactData withGroup(String group) {
-        this.group = group;
         return this;
     }
 
@@ -174,10 +172,6 @@ public class ContactData {
         return email3;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
     public String getAllPhones() {
         return allPhones;
     }
@@ -196,6 +190,10 @@ public class ContactData {
 
     public int getId() {
         return id;
+    }
+
+    public Groups getGroups() {
+        return  new Groups(groups);
     }
 
     @Override
@@ -221,5 +219,10 @@ public class ContactData {
         int result = firstname != null ? firstname.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
+    }
+//добавленный в группу контакт
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+            return this;
     }
 }

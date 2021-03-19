@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
+import ru.stqa.fortesters.addressbook.model.Groups;
 import java.io.File;
 import java.util.List;
 
@@ -34,8 +35,10 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-            if (contactData.getGroup() != null) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+           if (contactData.getGroups().size() > 0) {
+               Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
             }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
