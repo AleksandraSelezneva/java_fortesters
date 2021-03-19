@@ -26,6 +26,7 @@ public class ContactModificationTests extends TestBase {
             app.contact().create(newContact, true);
         }
     }
+
     @Test(enabled = true)
     public void testContactModification() throws Exception {
         Contacts before = app.db().contacts();
