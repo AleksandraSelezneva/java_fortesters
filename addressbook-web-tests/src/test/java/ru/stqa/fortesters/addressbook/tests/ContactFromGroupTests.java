@@ -29,7 +29,7 @@ public class ContactFromGroupTests extends TestBase {
         }
     }
     @Test
-    public void testContactsToGroup() throws Exception {
+    public void testContactsFromGroup() throws Exception {
         ContactData contact = new ContactData();
         app.goTo().homePage();
         app.contact().addContactToGroup(contact);
