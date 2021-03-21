@@ -86,6 +86,11 @@ public class ContactHelper extends HelperBase {
         gotoHomePage();
     }
 
+    public void addContactToGroup(ContactData contact) {
+        wd.findElement(By.name("selected[]")).click();
+        click(By.xpath("//input[@name='add']"));
+    }
+
     public void gotoHomePage() {
         if (isElementPresent(By.id("maintable"))){
             return;

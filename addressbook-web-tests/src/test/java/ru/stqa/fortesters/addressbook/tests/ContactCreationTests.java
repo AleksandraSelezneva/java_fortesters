@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactCreationTest extends TestBase {
+public class ContactCreationTests extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validContactsFromXml() throws IOException {

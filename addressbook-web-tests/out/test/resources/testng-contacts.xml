@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Contacts">
         <classes>
-            <class name="ru.stqa.fortesters.addressbook.tests.ContactCreationTest"/>
+            <class name="ru.stqa.fortesters.addressbook.tests.ContactCreationTests"/>
             <class name="ru.stqa.fortesters.addressbook.tests.ContactModificationTests"/>
-            <class name="ru.stqa.fortesters.addressbook.tests.ContactDeletionTests"/>
+            <class name="ru.stqa.fortesters.addressbook.tests.ContactToGroupTests"/>
             <class name="ru.stqa.fortesters.addressbook.tests.ContactPhoneTests"/>
         </classes>
     </test>
