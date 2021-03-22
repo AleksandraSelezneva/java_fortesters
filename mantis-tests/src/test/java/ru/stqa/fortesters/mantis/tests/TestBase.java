@@ -1,9 +1,9 @@
-package tests;
+package ru.stqa.fortesters.mantis.tests;
 
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import ru.stqa.fortesters.mantis.ApplicationManager;
+import ru.stqa.fortesters.mantis.appmanager.ApplicationManager;
 
 public class TestBase {
 

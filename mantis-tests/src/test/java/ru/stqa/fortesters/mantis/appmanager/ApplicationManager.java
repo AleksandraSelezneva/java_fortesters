@@ -1,4 +1,4 @@
-package ru.stqa.fortesters.mantis;
+package ru.stqa.fortesters.mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
