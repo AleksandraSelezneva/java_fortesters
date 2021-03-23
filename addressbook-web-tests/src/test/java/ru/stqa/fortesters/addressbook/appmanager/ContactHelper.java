@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
-import ru.stqa.fortesters.addressbook.model.Groups;
-import java.io.File;
+
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -35,8 +34,8 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-           if (contactData.getGroups().size() > 0) {
-               Assert.assertTrue(contactData.getGroups().size() == 1);
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
                 new Select(wd.findElement(By.name("new_group")))
                         .selectByVisibleText(contactData.getGroups().iterator().next().getName());
             }
@@ -86,16 +85,29 @@ public class ContactHelper extends HelperBase {
         gotoHomePage();
     }
 
-    public void addContactToGroup(ContactData contact) {
-        wd.findElement(By.name("selected[]")).click();
-        click(By.xpath("//input[@name='add']"));
-    }
-
     public void gotoHomePage() {
-        if (isElementPresent(By.id("maintable"))){
+        if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));
+    }
+
+    public void addContactToGroup() {
+        click(By.name("add"));
+        contactCache = null;
+        gotoHomePage();
+    }
+
+    public void removeContactFromGroup() {
+        wd.findElement(By.name("selected[]")).click();
+        click(By.name("remove"));
+        contactCache = null;
+        gotoHomePage();
+    }
+
+    public void selectedGroup(Contacts contactData) {
+        new Select(wd.findElement(By.name("group")))
+                .selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
     }
 
     public boolean isThereAContact() {
@@ -109,7 +121,7 @@ public class ContactHelper extends HelperBase {
     private Contacts contactCache = null;
 
     public Contacts all() {
-        if (contactCache != null){
+        if (contactCache != null) {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();

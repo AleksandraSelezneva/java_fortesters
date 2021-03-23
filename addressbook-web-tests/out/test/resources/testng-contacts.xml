@@ -5,7 +5,7 @@
         <classes>
             <class name="ru.stqa.fortesters.addressbook.tests.ContactCreationTests"/>
             <class name="ru.stqa.fortesters.addressbook.tests.ContactModificationTests"/>
-            <class name="ru.stqa.fortesters.addressbook.tests.ContactToGroupTests"/>
+            <class name="ru.stqa.fortesters.addressbook.tests.ContactGroupTests"/>
             <class name="ru.stqa.fortesters.addressbook.tests.ContactPhoneTests"/>
         </classes>
     </test>
