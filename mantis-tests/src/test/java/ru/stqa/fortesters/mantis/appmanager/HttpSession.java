@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class HttpSession {
         this.app = app;
         httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }
-//метод для выполнения логина
+
+    //метод для выполнения логина
     public boolean login(String username, String password) throws IOException {
         //содание будущего запроса для действий на стронице логина, пока пустой
         //Post-запрос передает данные
@@ -42,7 +44,9 @@ public class HttpSession {
         String body = geTextFrom(response);
         //проверка, действительно ли пользователь успешно вошел
         //дествительно ли код страницы содержит строку с именем пользователя
-        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+        return body.contains
+                (String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>",
+                username));
     }
 
     private String geTextFrom(CloseableHttpResponse response) throws IOException {
@@ -54,7 +58,7 @@ public class HttpSession {
     }
 
     //метод для определения, какой пользователь сейчас залогинен
-    public boolean isLoggedInAs (String username) throws IOException {
+    public boolean isLoggedInAs(String username) throws IOException {
         //формрование запроса для входа на главную страницу
         //Get-запрос не передает параметры
         HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
@@ -63,6 +67,7 @@ public class HttpSession {
         //получаем текст ответа
         String body = geTextFrom(response);
         //проверяем наличие нужного фрагмента в тексте страницы
-        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+        return body.contains
+                (String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
     }
 }

@@ -9,4 +9,5 @@ public class RegistrationTests extends TestBase {
         app.registration().start("user1", "user1@localhost.localdomain");
 
     }
+
 }

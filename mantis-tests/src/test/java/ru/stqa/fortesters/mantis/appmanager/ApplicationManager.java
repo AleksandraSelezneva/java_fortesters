@@ -17,6 +17,7 @@ public class ApplicationManager {
 
     private String browser;
     private RegistrationHelper registrationHelper;
+    private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -49,8 +50,14 @@ public class ApplicationManager {
         return registrationHelper;
     }
 
-    //инициализация драйвера будет происходить, т
-    // олько когда к нему кто-то обратится
+    public FtpHelper ftp () {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
+    //инициализация драйвера будет происходить только, когда к нему кто-то обратится
     public WebDriver getDriver(){
         if (wd == null){
             if (browser.equals(BrowserType.CHROME)){
