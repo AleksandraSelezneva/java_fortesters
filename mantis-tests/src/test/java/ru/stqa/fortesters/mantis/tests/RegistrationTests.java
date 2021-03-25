@@ -27,7 +27,7 @@ public class RegistrationTests extends TestBase {
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 1000);
         String conformationLink = findConformationLink(mailMessages, email); //ссылка, полученная из письма
-        app.registration().finish(user, conformationLink, password);
+        app.registration().finish(conformationLink, user, password);
         assertTrue (app.newSession().login(user,password));
     }
 
