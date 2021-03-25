@@ -1,10 +1,8 @@
 package ru.stqa.fortesters.mantis.appmanager;
 
 import org.apache.commons.net.telnet.TelnetClient;
-import org.subethamail.wiser.WiserMessage;
 import ru.stqa.fortesters.mantis.model.MailMessage;
 import javax.mail.*;
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -87,7 +85,7 @@ public class JamesHelper {
             StringBuffer sb = new StringBuffer();
             char ch = (char) in.read();
             while (true) {
-                System.out.println(ch);
+                System.out.print(ch);
                 sb.append(ch);
                 if (ch == lastChar) {
                     if (sb.toString().endsWith(pattern)) {
@@ -106,7 +104,7 @@ public class JamesHelper {
         try {
             out.println(value);
             out.flush();
-            System.out.println(value);
+            System.out.print(value);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,7 +144,8 @@ public List<MailMessage> waitForMail (String username, String password, long tim
             return allMail;
         }
         try {
-            Thread.sleep(1000);
+            Thread.sleep(15000);
+            //Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

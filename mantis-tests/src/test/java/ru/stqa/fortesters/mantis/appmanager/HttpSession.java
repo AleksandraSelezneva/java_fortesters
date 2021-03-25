@@ -44,10 +44,12 @@ public class HttpSession {
         String body = geTextFrom(response);
         //проверка, действительно ли пользователь успешно вошел
         //дествительно ли код страницы содержит строку с именем пользователя
-        return body.contains
-                (String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>",
-                username));
+        //return body.contains
+                //(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>",
+               // username));
+        return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
     }
+
 
     private String geTextFrom(CloseableHttpResponse response) throws IOException {
         try {
