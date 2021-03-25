@@ -15,10 +15,11 @@ public class RegistrationHelper extends HelperBase {
         click(By.cssSelector("input[value='Signup']"));
     }
 
-    public void finish(String conformationLink, String password) {
+    public void finish(String user,String conformationLink, String password) {
         wd.get(conformationLink); //переходим по ссылке получения пароля
+        type(By.name("realname"), user); //заполняем 1ое поле
         type(By.name("password"), password); //заполняем 1ое поле
         type(By.name("password_confirm"), password);//заполняем 2ое поле
-        click(By.cssSelector("input[value='Update User']"));
+        click(By.cssSelector("span.bigger-110"));
     }
 }
