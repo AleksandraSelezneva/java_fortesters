@@ -23,13 +23,14 @@ public class ChangePasswordTests extends TestBase {
     public void testChangePassword() throws IOException {
         HttpSession session = app.newSession();
         session.login("administrator", "root");
+        assertTrue(session.isLoggedInAs("administrator"));
         UserData user = app.db().users().iterator().next();
         app.resetPassword().start(user);
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 60000);
         String conformationLink = app.mail().findConformationLink(mailMessages, user.getEmail());
 
-        String password = "newPassword";
-        app.resetPassword().finish(conformationLink, user, password);
+       String password = "newPassword";
+       app.resetPassword().finish(conformationLink, user, password);
 
         assertTrue(session.login(user.getUsername(), password));
         assertTrue(session.isLoggedInAs(user.getUsername()));
