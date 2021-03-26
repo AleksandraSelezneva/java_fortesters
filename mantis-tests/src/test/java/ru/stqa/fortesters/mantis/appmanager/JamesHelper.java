@@ -110,7 +110,7 @@ public class JamesHelper {
         }
     }
 
-private void closeTelnetSession () {
+public void closeTelnetSession () {
         write ("quit");
 }
 

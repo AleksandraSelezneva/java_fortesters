@@ -3,7 +3,6 @@ package ru.stqa.fortesters.mantis.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.fortesters.mantis.model.MailMessage;
 
 import java.io.IOException;
@@ -26,15 +25,9 @@ public class RegistrationTests extends TestBase {
         String password = "password";
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
-        String conformationLink = findConformationLink(mailMessages, email); //ссылка, полученная из письма
+        String conformationLink = app.mail().findConformationLink(mailMessages, email); //ссылка, полученная из письма
         app.registration().finish(conformationLink, user, password);
         assertTrue (app.newSession().login(user,password));
-    }
-
-    private String findConformationLink(List<MailMessage> mailMessages, String email) {
-        MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-        VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-       return regex.getText(mailMessage.text);
     }
 
     @AfterMethod(alwaysRun = true)

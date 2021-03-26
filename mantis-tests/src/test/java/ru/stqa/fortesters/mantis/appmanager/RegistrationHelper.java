@@ -1,6 +1,7 @@
 package ru.stqa.fortesters.mantis.appmanager;
 
 import org.openqa.selenium.By;
+import ru.stqa.fortesters.mantis.model.UserData;
 
 public class RegistrationHelper extends HelperBase {
 
@@ -22,4 +23,5 @@ public class RegistrationHelper extends HelperBase {
         type(By.name("password_confirm"), password);//заполняем 2ое поле
         click(By.cssSelector("span.bigger-110"));
     }
+
 }
