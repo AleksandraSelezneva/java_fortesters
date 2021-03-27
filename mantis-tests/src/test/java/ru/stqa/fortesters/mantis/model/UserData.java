@@ -1,10 +1,7 @@
 package ru.stqa.fortesters.mantis.model;
 
 import javax.persistence.*;
-import java.io.File;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "mantis_user_table")

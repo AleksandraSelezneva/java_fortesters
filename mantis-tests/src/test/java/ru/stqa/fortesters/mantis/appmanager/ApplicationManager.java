@@ -95,7 +95,7 @@ public class ApplicationManager {
         return dbHelper;
     }
 
-    public AdminHelper resetPassword() {
+    public AdminHelper admin() {
         if (adminHelper == null) {
             adminHelper = new AdminHelper(this);
         }
