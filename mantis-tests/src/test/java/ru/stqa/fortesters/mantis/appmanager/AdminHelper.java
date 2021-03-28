@@ -19,7 +19,7 @@ public class AdminHelper extends HelperBase{
 
     public void reset(UserData user){
         click(By.cssSelector(String.format("a[href='manage_user_edit_page.php?user_id=%s']", user.getId())));
-        click(By.linkText("Reset Password"));
+        click(By.xpath("//form[@id = 'manage-user-reset-form']//input[@type='submit']"));
     }
 
     public void login(String username, String password) {

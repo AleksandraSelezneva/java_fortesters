@@ -27,3 +27,13 @@ wsdl2java {
     ]
     cxfVersion = "2.5.1"
 }
+
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.12'
+    }
+}
