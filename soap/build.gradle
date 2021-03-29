@@ -23,9 +23,9 @@ apply plugin: 'no.nils.wsdl2java'
 wsdl2java {
     wsdlDir = file("src/main/resources") // define to support incremental build
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                          ['src/main/resources/geoip.wsdl'],
+                          ["$projectDir/src/main/resources/geoip.wsdl"],
     ]
-    cxfVersion = "2.5.1"
+    cxfVersion = "3.3.1"
 }
 
 buildscript{
