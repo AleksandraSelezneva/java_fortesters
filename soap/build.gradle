@@ -6,8 +6,8 @@ repositories {
 
 dependencies {
     implementation 'org.testng:testng:7.0.0'
-    implementation 'com.sun.xml.ws:rt:3.0.0'
-    implementation 'com.sun.xml.ws:jaxws-rt:3.0.0'
+    implementation 'com.sun.xml.ws:rt:2.3.1'
+    implementation 'com.sun.xml.ws:jaxws-rt:2.3.1'
 }
 
 buildscript{
