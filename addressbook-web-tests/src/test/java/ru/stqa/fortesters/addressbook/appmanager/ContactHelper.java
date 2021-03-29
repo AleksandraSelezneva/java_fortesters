@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
+import ru.stqa.fortesters.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -108,6 +109,23 @@ public class ContactHelper extends HelperBase {
     public void selectedGroup(Contacts contactData) {
         new Select(wd.findElement(By.name("group")))
                 .selectByVisibleText(contactData.iterator().next().getGroups().iterator().next().getName());
+    }
+
+    public void selectGroup(GroupData group) {
+        click(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId())));
+    }
+
+    public void groupName(GroupData group) {
+        click(By.xpath(String.format("//select[@name='group']/option[text() = '%s']", group.getName())));
+    }
+
+    public void selectContactWithoutGroup(ContactData contact) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
+        click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+    }
+
+    public void selectContact(ContactData contact) {
+        click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
     }
 
     public boolean isThereAContact() {

@@ -3,10 +3,9 @@ package ru.stqa.fortesters.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
-import ru.stqa.fortesters.addressbook.model.Contacts;
 import ru.stqa.fortesters.addressbook.model.GroupData;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import ru.stqa.fortesters.addressbook.model.Groups;
+import static org.testng.Assert.assertTrue;
 
 public class ContactGroupTests extends TestBase {
 
@@ -27,27 +26,45 @@ public class ContactGroupTests extends TestBase {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
         }
+        if (app.db().contactWithoutGroups().size() == 0) {
+            app.goTo().homePage();
+            app.contact().create(newContact, true);
+        }
+        if (app.db().contactWithGroups().size() == 0) {
+            ContactData before = app.db().contactWithoutGroup();
+            Groups groups = app.db().groups();
+            GroupData group = groups.iterator().next();
+            app.goTo().homePage();
+            app.contact().selectContactWithoutGroup(before);
+            app.contact().selectGroup(group);
+            app.contact().addContactToGroup();
+        }
     }
 
-    @Test(priority = 1)
+    @Test (priority = 1)
     public void testContactsToGroup() throws Exception {
-        Contacts before = app.db().contacts();
+        ContactData before = app.db().contactWithoutGroup();
+        Groups groups = app.db().groups();
+        GroupData group = groups.iterator().next();
         app.goTo().homePage();
-        app.contact().selectedContactById(before.iterator().next().getId());
+        app.contact().selectContactWithoutGroup(before);
+        app.contact().selectGroup(group);
         app.contact().addContactToGroup();
-        Contacts after = app.db().contacts();
-        assertThat(before.iterator().next(), equalTo(after.iterator().next()));
+        ContactData after = app.db().contactById(before.getId());
+        assertTrue(after.getGroups().contains(group));
         verifyContactListInUI();
     }
 
     @Test(priority = 2)
     public void testContactsFromGroup() throws Exception {
-        Contacts before = app.db().contacts();
+        ContactData before = app.db().contactWithGroup();
+        GroupData group = before.getGroups().iterator().next();
         app.goTo().homePage();
-        app.contact().selectedGroup(before);
+        app.contact().groupName(group);
+        app.contact().selectContact(before);
         app.contact().removeContactFromGroup();
-        Contacts after = app.db().contacts();
-        assertThat(before.iterator().next(), equalTo(after.iterator().next()));
+        ContactData after = app.db().contactById(before.getId());
+        assertTrue(after.getGroups().contains(group));
         verifyContactListInUI();
     }
 }
