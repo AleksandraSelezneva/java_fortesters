@@ -1,6 +1,7 @@
 package ru.stqa.fortesters.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
+import org.testng.SkipException;
 import ru.stqa.fortesters.mantis.model.Issue;
 import ru.stqa.fortesters.mantis.model.Project;
 
@@ -31,10 +32,10 @@ return Arrays.asList(projects).stream()
         .collect(Collectors.toSet());
     }
 
-    private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+    public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
         MantisConnectPortType mc = new MantisConnectLocator()
                 //.getMantisConnectPort(new URL("http://localhost:8080/mantisbt-2.25.0/api/soap/mantisconnect.php"));
-        .getMantisConnectPort(new URL(app.getProperty("mantisurl")));
+        .getMantisConnectPort(new URL(app.getProperty("mantisUrl")));
         return mc;
     }
 
@@ -51,14 +52,18 @@ return Arrays.asList(projects).stream()
         //берем первую папавшуюся категорию
         issueData.setCategory(categories [0]);
         //обратное преобразование, присваиваем айди сощданного ишью в перевенную issueId
-        BigInteger issueId = mc.mc_issue_add("administrator", "root", issueData);
+        BigInteger issueId = mc.mc_issue_add(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), issueData);
         //создаем запрос гет, передаем в него айди только что созданного ишью и в ответ получаем объект типа IssueData
-        IssueData createdIssueData = mc.mc_issue_get("administrator", "root", issueId);
+        IssueData createdIssueData = mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), issueId);
         //преобразуем в тот модельный объект, который нам нужен
         return new Issue().withId(createdIssueData.getId().intValue())
                 .withSummary(createdIssueData.getSummary())
                 .withDescription(createdIssueData.getDescription())
                 .withProject(new Project().withId(createdIssueData.getProject().getId().intValue())
-                .withName(createdIssueData.getProject().getName()));
+                                          .withName(createdIssueData.getProject().getName()));
     }
+
+
+
+
 }

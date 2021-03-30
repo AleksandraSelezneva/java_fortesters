@@ -30,4 +30,10 @@ public class SoapTests extends TestBase {
         Issue created = app.soap().addIssue(issue); //создадим новое ишью
         assertEquals(issue.getSummary(), created.getSummary()); //сравним имеющийся объект ишью с созданным по саммари
     }
+
+    @Test
+    public void testGetIssueStatus() throws MalformedURLException, ServiceException, RemoteException {
+        String issueStatus = issueStatus(1);
+        System.out.println(issueStatus);
+    }
 }
