@@ -18,6 +18,7 @@ dependencies {
     implementation('io.github.henryssondaniel.teacup.protocol:telnet:1.0.0') {
         exclude group: 'log4j', module: 'log4j'
     }
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 test {
