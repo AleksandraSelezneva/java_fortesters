@@ -62,8 +62,4 @@ return Arrays.asList(projects).stream()
                 .withProject(new Project().withId(createdIssueData.getProject().getId().intValue())
                                           .withName(createdIssueData.getProject().getName()));
     }
-
-
-
-
 }
