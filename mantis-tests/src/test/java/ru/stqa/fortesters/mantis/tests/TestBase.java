@@ -34,8 +34,12 @@ public class TestBase {
     }
 
     public boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-        if (issueStatus(issueId).equals("resolved") ||
-                issueStatus(issueId).equals("closed")) {
+        MantisConnectPortType mc = app.soap().getMantisConnect();
+        IssueData issueData = mc.mc_issue_get
+                (app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
+        Issue issue = new Issue().withId(issueData.getId().intValue()).withStatus(issueData.getStatus().getName());
+        if (issue.getStatus().equals("resolved") ||
+                issue.getStatus().equals("closed")) {
             return false;
         } else {
             return true;
@@ -48,11 +52,5 @@ public class TestBase {
         }
     }
 
-    public String issueStatus(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-        MantisConnectPortType mc = app.soap().getMantisConnect();
-        IssueData issueData = mc.mc_issue_get
-                (app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
-        Issue issue = new Issue().withId(issueData.getId().intValue()).withStatus(issueData.getStatus().getName());
-        return issue.getStatus();
-    }
+
 }

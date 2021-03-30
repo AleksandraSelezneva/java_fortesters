@@ -11,7 +11,7 @@ public class LoginTests  extends TestBase {
 
     @Test
     public void testLogin () throws IOException, ServiceException {
-        skipIfNotFixed(2);
+        skipIfNotFixed(1);
         HttpSession session = app.newSession();
         //проверка, что после входа в систему на странице появился нужный текст
         assertTrue(session.login ("administrator", "root"));
