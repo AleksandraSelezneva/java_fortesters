@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Groups;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactPhoneTests extends TestBase {
 
     @BeforeMethod
-    public void ensurePreconditions() {
+    public void ensurePreconditions() throws IOException {
         Groups groups = app.db().groups();
         //File photo = new File("src/test/resources/ava.png");
         ContactData newContact = new ContactData()
@@ -30,7 +31,7 @@ public class ContactPhoneTests extends TestBase {
     }
 
     @Test
-    public void testContactPhones() {
+    public void testContactPhones() throws IOException {
         app.goTo().homePage();
         //загружаем мн-во контактов
         ContactData contact = app.contact().all().iterator().next();

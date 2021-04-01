@@ -1,16 +1,23 @@
 package ru.stqa.fortesters.addressbook.appmanager;
 
+import com.google.gson.JsonElement;
+import org.apache.http.client.fluent.Request;
+import org.hibernate.service.spi.ServiceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import static com.google.gson.JsonParser.parseString;
+
 
 public class ApplicationManager {
     private final Properties properties;

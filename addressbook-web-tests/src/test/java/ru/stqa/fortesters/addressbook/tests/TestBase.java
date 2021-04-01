@@ -82,6 +82,7 @@ public class TestBase {
                     .collect(Collectors.toSet())));
         }
     }
+
     public void skipIfNotFixed(int issueId) throws IOException {
         if (isIssueOpen(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);

@@ -6,13 +6,16 @@ import ru.stqa.fortesters.addressbook.model.ContactData;
 import ru.stqa.fortesters.addressbook.model.Contacts;
 import ru.stqa.fortesters.addressbook.model.Groups;
 
+import java.io.IOException;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletionTests extends TestBase {
 
     @BeforeMethod
-    public void ensurePreconditions() {
+    public void ensurePreconditions() throws IOException {
+        skipIfNotFixed(824);
         Groups groups = app.db().groups();
         //File photo = new File("src/test/resources/ava.png");
         ContactData newContact = new ContactData()
