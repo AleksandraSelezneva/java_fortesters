@@ -24,13 +24,13 @@ public class TestBase {
     public void setUp() throws Exception {
         app.init();
         app.ftp().upload(new File
-                ("src/test/resources/config_inc.php"), "config_inc.php","config_inc.php.back");
+                ("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.back");
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
         app.stop();
-        app.ftp().restore("config_inc.php.back","config_inc.php");
+        app.ftp().restore("config_inc.php.back", "config_inc.php");
     }
 
     public boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
@@ -51,6 +51,4 @@ public class TestBase {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
-
-
 }

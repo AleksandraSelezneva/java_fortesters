@@ -6,7 +6,6 @@ public class Issue {
     private String summary;
     private String description;
     private Project project;  //будет связан с каким-то проектом
-    private String resolution;
     private String status;
 
     public String getStatus() {
@@ -15,15 +14,6 @@ public class Issue {
 
     public Issue withStatus(String status) {
         this.status = status;
-        return this;
-    }
-
-    public String getResolution() {
-        return resolution;
-    }
-
-    public Issue withResolution(String resolution) {
-        this.resolution = resolution;
         return this;
     }
 
