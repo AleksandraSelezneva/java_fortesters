@@ -54,6 +54,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) throws Exception {
+        skipIfNotFixed(823);
         Contacts before = app.db().contacts();
         app.goTo().groupPage();
         if (!app.group().isThereAGroup()) {

@@ -22,11 +22,17 @@ public class ApplicationManager {
     private GroupHelper groupHelper;
     private String browser;
     private DbHelper dbHelper;
+    private RestHelper restHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
     }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
+
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
@@ -74,5 +80,9 @@ public class ApplicationManager {
 
     public DbHelper db() {
         return dbHelper;
+    }
+
+    public RestHelper rest() {
+        return restHelper;
     }
 }
