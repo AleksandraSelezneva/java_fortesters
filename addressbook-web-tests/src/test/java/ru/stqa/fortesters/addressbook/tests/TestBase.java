@@ -1,10 +1,6 @@
 package ru.stqa.fortesters.addressbook.tests;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import org.apache.http.message.BasicNameValuePair;
 import org.hibernate.service.spi.ServiceException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.BrowserType;
@@ -17,16 +13,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.fortesters.addressbook.appmanager.ApplicationManager;
 import ru.stqa.fortesters.addressbook.model.*;
-import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.google.gson.JsonParser.parseString;
@@ -88,8 +79,10 @@ public class TestBase {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
+
     public boolean isIssueOpen(int issueId) throws IOException, ServiceException {
-        String json = app.rest().getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/" + String.format("issues/%s.json", issueId)))
+        String json = app.rest().getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/" + String.format(
+                "issues/%s.json", issueId)))
                 .returnContent().asString();
         JsonElement parsed = parseString(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
