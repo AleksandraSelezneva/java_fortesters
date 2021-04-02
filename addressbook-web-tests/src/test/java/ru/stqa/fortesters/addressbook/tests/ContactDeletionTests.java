@@ -15,7 +15,6 @@ public class ContactDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() throws IOException {
-        skipIfNotFixed(824);
         Groups groups = app.db().groups();
         //File photo = new File("src/test/resources/ava.png");
         ContactData newContact = new ContactData()
@@ -33,6 +32,7 @@ public class ContactDeletionTests extends TestBase {
 
     @Test(enabled = true)
     public void testContactDeletion() throws Exception {
+        skipIfNotFixed(824);
         Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.goTo().homePage();

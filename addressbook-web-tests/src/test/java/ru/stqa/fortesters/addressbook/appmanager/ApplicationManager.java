@@ -89,7 +89,11 @@ public class ApplicationManager {
         return dbHelper;
     }
 
+
     public RestHelper rest() {
+        if (restHelper == null) {
+            restHelper = new RestHelper(this);
+        }
         return restHelper;
     }
 }
